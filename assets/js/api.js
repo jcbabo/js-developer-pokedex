@@ -1,4 +1,4 @@
-const pokeapi = {}
+const pokeApi = {}
 
 function converteDetailsParaModel(detalhesPokemons) {
     const pokemon = new pokemonModel();
@@ -15,20 +15,20 @@ function converteDetailsParaModel(detalhesPokemons) {
     return pokemon;
 }
 
-pokeapi.getDetalhesPokemons = (pokemon) => {
-    const response = fetch(pokemon.url);
-    const detalhesPokemons = response.json();
-    return converteDetailsParaModel(detalhesPokemons);
+pokeApi.getDetalhesPokemons = (pokemon) => {
+    return fetch(pokemon.url)
+        .then((response) => response.json())
+        .then(converteDetailsParaModel)
 }
 
-pokeapi.getPokemons = (offset = 0, limit = 6) => {
+pokeApi.getPokemons = (offset = 0, limit = 12) => {
     const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
     
-    const response = fetch(url);
-    const jsonBody = response.json();
-    const pokemons = jsonBody.results;
-    const detalhesRequests = pokemons.map(pokeapi.getDetalhesPokemons);
-    const detalhesPokemons = Promise.all(detalhesRequests);
-    return detalhesPokemons;
+    return fetch(url)
+        .then((response) => response.json())
+        .then((jsonBody) => jsonBody.results)
+        .then((pokemons) => pokemons.map(pokeApi.getDetalhesPokemons))
+        .then((detalhesRequests) => Promise.all(detalhesRequests))
+        .then((detalhesPokemons) => detalhesPokemons)
 }
 
