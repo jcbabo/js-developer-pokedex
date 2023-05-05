@@ -1,13 +1,13 @@
-const listaPokemon = document.getElementById('lista-pokemon')
-const carregaMaisPokemonsButton = document.getElementById('carrega-mais-pokemons')
 
-//const maxRecords = 151
-const limit = 6;
+const listaPokemon = document.getElementById('lista-pokemon');
+const carregaMaisPokemonsButton = document.getElementById('carrega-mais-pokemons');
+
 let offset = 0;
+const limit = 3;
 
-function convertePokemonParaLi(pokemon) {
+function pokemonLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li class="pokemon ${pokemon.type}" onclick="selecionaPokemon(${pokemon.id})">
             <span class="number">#${pokemon.order}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -24,23 +24,21 @@ function convertePokemonParaLi(pokemon) {
 
 function carregaMaisPokemons(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        const novoHtml = pokemons.map(convertePokemonParaLi).join('')
+        const novoHtml = pokemons.map(pokemonLi).join('');
         listaPokemon.innerHTML += novoHtml
     })
 }
 
-carregaMaisPokemons(offset, limit)
+carregaMaisPokemons(offset, limit);
 
 carregaMaisPokemonsButton.addEventListener('click', () => {
     offset += limit
-    const qtdRecordsWithNexPage = offset + limit
+    carregaMaisPokemons(offset, limit);
+});
 
-    if (qtdRecordsWithNexPage >= maxRecords) {
-        const newLimit = maxRecords - offset
-        carregaMaisPokemons(offset, newLimit)
-
-        carregaMaisPokemonsButton.parentElement.removeChild(carregaMaisPokemonsButton)
-    } else {
-        carregaMaisPokemons(offset, limit)
-    }
-})
+function selecionaPokemon(id) {
+    pokeApi.getPokemonsById(id).then((pokemon) => {
+        const HtmlDetalhes = detalhesPokemon(pokemon);
+        listaPokemon.innerHTML += HtmlDetalhes
+    })
+}
