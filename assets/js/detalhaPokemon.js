@@ -5,34 +5,36 @@ function detalhesPokemon(pokemon) {
     const weight = (pokemon.weight) / 10;
 
     const htmlDetalhes = `
-        <div class="popup">
-            <li class="pokemon ${pokemon.type}" onclick="selecionaPokemon(${pokemon.id})">
-                <span class="number">#${pokemon.order}</span>
-                <span class="name">${pokemon.name}</span>
+        
+            <div class="popup">
+                <button id="close-btn" onClick="fechaDetalhes()">X</button>
+                <li class="pokemon ${pokemon.type} card-top" onclick="selecionaPokemon(${pokemon.id})">
+                    <span class="number">#${pokemon.order}</span>
+                    <span class="name">${pokemon.name}</span>
 
-                <div class="detail">
-                    <ol class="types">
-                        ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
-                    </ol>
+                    <div class="detail">
+                        <ol class="types">
+                            ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                        </ol>
 
-                    <img src="${pokemon.photo}" alt="${pokemon.name}">
+                        <img src="${pokemon.photo}" alt="${pokemon.name}">
+                    </div>
+                </li>
+                <div class="info-container">
+                    <li class="about">Sobre</li>    
+                    <li class="card-bottom">
+                        <span class="label">Altura</span>
+                        <span class="value">${height}m</span>
+                        <span class="label">Peso</span>
+                        <span class="value">${weight}kg</span>
+                        <span class="label">habilidades</span>
+                        <ol class="value abilities">
+                            ${pokemon.abilities.map((ability) => `<li class="ability">${ability}</li>`).join('')}
+                        </ol>
+                    </li>
                 </div>
-            </li>
-            <li class="about">Sobre</li>    
-            <li>
-                <span class="label">Altura</span>
-                <span class="content">${height}m</span>
-                <span class="label">Peso</span>
-                <span class="content">${weight}kg</span>
-                <span class="label">habilidades</span>
-                <span class="content abilities-details">
-                    <ol class="abilities">
-                        ${pokemon.abilities.map((ability) => `<li class="ability">${ability}</li>`).join('')}
-                    </ol>
-                </span>
-            </li>
-            <button id="closeBtn" onClick="fechaDetalhes()">X</button>
-        </div>
+            </div>
+        
     `
     return htmlDetalhes;
 }

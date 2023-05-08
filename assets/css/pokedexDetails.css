@@ -1,0 +1,80 @@
+.card {
+    animation: scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    height: 23rem;
+    width: 16rem;
+    padding: 0.5rem;
+    border: solid 0.5px gray;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 10px black;
+}
+
+.popup {
+    animation: scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    height: 23rem;
+    width: 16rem;
+    /* padding: 0.5rem; */
+    /* border: solid 0.5px gray; */
+    border-radius: 1rem;
+    box-shadow: 5px 5px 10px black;
+}
+
+.card-top {
+    width: 16rem;
+    margin: 0px !important;
+    height: 13rem;
+    display: block;
+    position: relative;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    margin-top: -37px;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+}
+
+.about {
+    font-size: 18px;
+    text-align: center;
+}
+
+.card-bottom {
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5px;
+    row-gap: 10px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.label {
+    grid-column: 1/2;
+}
+
+.value {
+    grid-column: 2/4;
+}
+
+.abilities {
+    display: inline-flex;
+    list-style: none;
+    gap: 10px;
+    margin-left: -39px;
+}
+
+#close-btn {
+    background: none;
+    border: 1px solid gray;
+    color: gray;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 14px;
+    font-size: 9px;
+    line-height: 1.9;
+    float: right;
+    position: relative;
+}
