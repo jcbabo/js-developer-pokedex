@@ -1,14 +1,17 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
 
-const maxRecords = 151
-const limit = 10
-let offset = 0;
+const listaPokemon = document.getElementById('lista-pokemon');
+const cardPokemon = document.getElementById('card-pokemon');
+const carregaMaisPokemonsButton = document.getElementById('carregaMaisPokemons');
 
-function convertPokemonToLi(pokemon) {
+let offset = 0;
+const limit = 12;
+
+function pokemonLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
-            <span class="number">#${pokemon.number}</span>
+        <li id="pokemon" class="pokemon ${pokemon.type}" onclick="selecionaPokemon(${pokemon.id})">
+            <span class="number">#${pokemon.order}</span>
             <span class="name">${pokemon.name}</span>
 
             <div class="detail">
@@ -16,32 +19,39 @@ function convertPokemonToLi(pokemon) {
                     ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
                 </ol>
 
-                <img src="${pokemon.photo}"
-                     alt="${pokemon.name}">
+                <img src="${pokemon.photo}" alt="${pokemon.name}">
             </div>
         </li>
     `
 }
 
-function loadPokemonItens(offset, limit) {
+function carregaMaisPokemons(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        const newHtml = pokemons.map(convertPokemonToLi).join('')
-        pokemonList.innerHTML += newHtml
+        const novoHtml = pokemons.map(pokemonLi).join('');
+        listaPokemon.innerHTML += novoHtml
     })
 }
 
-loadPokemonItens(offset, limit)
+carregaMaisPokemons(offset, limit);
 
-loadMoreButton.addEventListener('click', () => {
+carregaMaisPokemonsButton.addEventListener('click', () => {
     offset += limit
-    const qtdRecordsWithNexPage = offset + limit
+    carregaMaisPokemons(offset, limit);
+});
 
-    if (qtdRecordsWithNexPage >= maxRecords) {
-        const newLimit = maxRecords - offset
-        loadPokemonItens(offset, newLimit)
-
-        loadMoreButton.parentElement.removeChild(loadMoreButton)
-    } else {
-        loadPokemonItens(offset, limit)
-    }
-})
+function selecionaPokemon(id) {
+    pokeApi.getPokemonsById(id).then((pokemon) => {
+        const HtmlDetalhes = detalhesPokemon(pokemon);
+        cardPokemon.innerHTML += HtmlDetalhes;
+        
+        const escondePokemonList = document.getElementById("lista-pokemon");
+        escondePokemonList.classList.add("hide");
+        
+        const escondeButton = document.getElementById("carregaMaisPokemons");
+        escondeButton.classList.add("hide");
+        
+        const mostraButtonRetornarParaLista = document.getElementById("mostraLista");
+        mostraButtonRetornarParaLista.classList.remove("hide");
+        
+    })
+}
