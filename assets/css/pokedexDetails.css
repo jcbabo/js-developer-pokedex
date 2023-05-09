@@ -8,12 +8,10 @@
     box-shadow: 5px 5px 10px black;
 }
 
-.popup {
+#popup {
     animation: scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    height: 23rem;
+    /* height: 23rem; */
     width: 16rem;
-    /* padding: 0.5rem; */
-    /* border: solid 0.5px gray; */
     border-radius: 1rem;
     box-shadow: 5px 5px 10px black;
 }
@@ -24,6 +22,34 @@
     height: 13rem;
     display: block;
     position: relative;
+    z-index: 1;
+}
+
+.number-card {
+    display: none;
+}
+
+.name-card {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.detail-card {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.types-card {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#img-card {
+    height: 7.5rem;
+    margin-top: 1.5rem;
 }
 
 .info-container {
@@ -31,8 +57,6 @@
     flex-direction: column;
     border-radius: 1rem;
     margin-top: -37px;
-    position: relative;
-    z-index: 1;
     background: #fff;
 }
 
@@ -45,14 +69,16 @@
     font-size: 14px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 5px;
+    column-gap: 10px;
     row-gap: 10px;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
+    padding: 1.2rem 1.2rem 1.2rem 3rem;
+    margin-top: 4rem;
 }
 
 .label {
     grid-column: 1/2;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .value {
@@ -60,21 +86,32 @@
 }
 
 .abilities {
-    display: inline-flex;
+    display: flex;
     list-style: none;
     gap: 10px;
-    margin-left: -39px;
+    flex-direction: column;
+    margin: 0px 0px 0px -39px;
 }
 
-#close-btn {
-    background: none;
-    border: 1px solid gray;
-    color: gray;
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 14px;
-    font-size: 9px;
-    line-height: 1.9;
-    float: right;
-    position: relative;
+#card-pokemon {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 320px) {
+    .btn-card {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .btn-card {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .btn-card {
+        width: 27%;
+    }
 }

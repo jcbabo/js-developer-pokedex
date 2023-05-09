@@ -6,22 +6,21 @@ function detalhesPokemon(pokemon) {
 
     const htmlDetalhes = `
         
-            <div class="popup">
-                <button id="close-btn" onClick="fechaDetalhes()">X</button>
+            <div id="popup">
                 <li class="pokemon ${pokemon.type} card-top" onclick="selecionaPokemon(${pokemon.id})">
-                    <span class="number">#${pokemon.order}</span>
-                    <span class="name">${pokemon.name}</span>
+                    <span class="number number-card">#${pokemon.order}</span>
+                    <span class="name name-card">${pokemon.name}</span>
 
-                    <div class="detail">
-                        <ol class="types">
+                    <div class="detail detail-card">
+                        <ol class="types types-card">
                             ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
                         </ol>
 
-                        <img src="${pokemon.photo}" alt="${pokemon.name}">
+                        <img  id="img-card" src="${pokemon.photo}" alt="${pokemon.name}">
                     </div>
                 </li>
-                <div class="info-container">
-                    <li class="about">Sobre</li>    
+                <div class="info-container ${pokemon.type}">
+                    <!-- <li class="about">Sobre</li> -->
                     <li class="card-bottom">
                         <span class="label">Altura</span>
                         <span class="value">${height}m</span>
@@ -34,12 +33,21 @@ function detalhesPokemon(pokemon) {
                     </li>
                 </div>
             </div>
-        
     `
     return htmlDetalhes;
 }
 
 const fechaDetalhes = () => {
-    const popup = document.querySelector('.popup');
-    popup.parentElement.removeChild(popup)
+    const mostraLista = document.querySelector("#lista-pokemon");
+    mostraLista.classList.remove("hide");
+    mostraLista.classList.add("pokemons");
+
+    const popup = document.querySelector('#popup');
+    popup.parentElement.removeChild(popup);
+
+    const mostraButton = document.getElementById('carregaMaisPokemons');
+    mostraButton.classList.remove('hide');
+
+    const escondeButtonVoltarlista = document.getElementById('mostraLista');
+    escondeButtonVoltarlista.classList.add("hide");
 }

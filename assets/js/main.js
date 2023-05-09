@@ -1,13 +1,14 @@
 
 const listaPokemon = document.getElementById('lista-pokemon');
-const carregaMaisPokemonsButton = document.getElementById('carrega-mais-pokemons');
+const cardPokemon = document.getElementById('card-pokemon');
+const carregaMaisPokemonsButton = document.getElementById('carregaMaisPokemons');
 
 let offset = 0;
-const limit = 3;
+const limit = 12;
 
 function pokemonLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}" onclick="selecionaPokemon(${pokemon.id})">
+        <li id="pokemon" class="pokemon ${pokemon.type}" onclick="selecionaPokemon(${pokemon.id})">
             <span class="number">#${pokemon.order}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -39,6 +40,16 @@ carregaMaisPokemonsButton.addEventListener('click', () => {
 function selecionaPokemon(id) {
     pokeApi.getPokemonsById(id).then((pokemon) => {
         const HtmlDetalhes = detalhesPokemon(pokemon);
-        listaPokemon.innerHTML += HtmlDetalhes
+        cardPokemon.innerHTML += HtmlDetalhes;
+        
+        const escondePokemonList = document.getElementById("lista-pokemon");
+        escondePokemonList.classList.add("hide");
+        
+        const escondeButton = document.getElementById("carregaMaisPokemons");
+        escondeButton.classList.add("hide");
+        
+        const mostraButtonRetornarParaLista = document.getElementById("mostraLista");
+        mostraButtonRetornarParaLista.classList.remove("hide");
+        
     })
 }

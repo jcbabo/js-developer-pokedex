@@ -29,20 +29,23 @@
 
         <ol id="lista-pokemon" class="pokemons">
         </ol>
+        <section id="card-pokemon"></section>
         <div class="paginacao">
-            <!-- TODO: ajustar o CSS dessa tela para pegar a tela mobile inteira -->
-            <button id="carrega-mais-pokemons" type="button">
+            <button id="carregaMaisPokemons" class="buttons btn-list" type="button">
                 Carregar mais pokemons
+            </button>
+            <button id="mostraLista" type="button" class="buttons hide btn-card" onClick="fechaDetalhes()">
+                Mostrar lista
             </button>
         </div>
     </section>
     <script src="/assets/js/converteParaModel.js"></script>
-    <script src="/assets/js/api.js"></script>    
+    <script src="/assets/js/api.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/selecionaPokemon.js"></script>
     <script src="/assets/js/detalhaPokemon.js"></script>
     <script src="/assets/js/pokemonModel.js"></script>
-    
+
 </body>
 
 </html>
